@@ -1,0 +1,45 @@
+<idea-plugin>
+    <id>com.iambedant.commentTranslator</id>
+    <name>Comment Translator</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+
+    <application-components>
+        <component>
+            <implementation-class>components.TranslatorComponents</implementation-class>
+        </component>
+    </application-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <defaultProjectTypeProvider type="Android"/>
+        <projectConfigurable
+                instance="settings.TranslatorSettings">
+        </projectConfigurable>
+    </extensions>
+
+    <actions>
+        <group id="CommentTranslator.TopMenu"
+               text="_Translator"
+               description="Translate Selected text">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+
+            <action id="MyAction"
+                    class="action.MyAction"
+                    text="_Translate"
+                    description="TranslateText">
+                <keyboard-shortcut keymap="$default" first-keystroke="meta T"/>
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
