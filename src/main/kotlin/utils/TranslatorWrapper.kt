@@ -1,6 +1,7 @@
 package utils
 
 import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.translate.Language
 import com.google.cloud.translate.Translate
 import com.google.cloud.translate.TranslateOptions
 import com.google.common.collect.Lists
@@ -21,7 +22,12 @@ object TranslatorWrapper {
         TranslateOptions.newBuilder().setCredentials(credentials).build().service
     }
 
-    private var targetLanguage = "en"
+    var targetLanguage = "English -en"
+
+
+    fun getLanguageCode(language: String): String {
+        return language.substringAfter("-")
+    }
 
 
     /**
@@ -37,30 +43,16 @@ object TranslatorWrapper {
 
         val translation = translate.translate(
             selectedText,
-            Translate.TranslateOption.targetLanguage(targetLanguage)
+            Translate.TranslateOption.targetLanguage(getLanguageCode(targetLanguage))
         )
 
         return translation.translatedText!!
     }
 
 
-    fun changeTargetLanguageFromName(target: String) {
-        val language = translate.listSupportedLanguages().find { it.name == target }
-        language?.let {
-            targetLanguage = language.code
-        }
-
-    }
-
-
-    fun changeTargetLanguageFromCode(target: String) {
-        targetLanguage = target
-    }
-
-
     /**
      * return a list of language supported by google translator
      */
-    fun getLanguageList() = translate.listSupportedLanguages()
+    fun getLanguageList(): List<Language> = translate.listSupportedLanguages()
 
 }

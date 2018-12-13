@@ -19,7 +19,7 @@ class TranslatorComponents :
 
 
     var configJsonPath: String = ""
-    var preferedLanguage: String = "en"
+    var preferedLanguage: String = "English -en"
 
     override fun getState(): TranslatorComponents? = this
 
@@ -28,7 +28,7 @@ class TranslatorComponents :
 
     override fun initComponent() {
         super.initComponent()
-        TranslatorWrapper.changeTargetLanguageFromCode(preferedLanguage)
+        TranslatorWrapper.targetLanguage = preferedLanguage
         TranslatorWrapper.filePath = configJsonPath
     }
 
