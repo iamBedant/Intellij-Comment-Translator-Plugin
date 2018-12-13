@@ -9,32 +9,31 @@ import java.io.FileInputStream
 
 object TranslatorWrapper {
 
-
     lateinit var filePath: String
-
-    private val credentials by lazy {
-        GoogleCredentials.fromStream(FileInputStream(filePath))
-            .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"))
-
-    }
-
-    private val translate by lazy {
-        TranslateOptions.newBuilder().setCredentials(credentials).build().service
-    }
-
+    private lateinit var translate: Translate
     var targetLanguage = "English -en"
-
 
     fun getLanguageCode(language: String): String {
         return language.substringAfter("-")
     }
 
+    fun initializeTranslator(){
+        val credentials = GoogleCredentials.fromStream(FileInputStream(filePath))
+            .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"))
+
+        translate = TranslateOptions.newBuilder().setCredentials(credentials).build().service
+
+    }
 
     /**
      * takes a string and return a translated string
      * @param selectedText
      */
-    fun translate(selectedText: String?): String {
+    fun translateString(selectedText: String?): String {
+
+        if(!TranslatorWrapper::translate.isInitialized){
+            initializeTranslator()
+        }
 
         //Should not happen because we are disabling the plugin if nothing is selected. Added it for just an extra check
         if (selectedText.isNullOrEmpty()) {
@@ -53,6 +52,11 @@ object TranslatorWrapper {
     /**
      * return a list of language supported by google translator
      */
-    fun getLanguageList(): List<Language> = translate.listSupportedLanguages()
+    fun getLanguageList(): List<Language>{
+        if(!TranslatorWrapper::translate.isInitialized){
+            initializeTranslator()
+        }
+        return translate.listSupportedLanguages()
+    }
 
 }

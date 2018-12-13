@@ -14,7 +14,6 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
-
     <application-components>
         <component>
             <implementation-class>components.TranslatorComponents</implementation-class>
@@ -38,7 +37,7 @@
                     class="action.MyAction"
                     text="_Translate"
                     description="TranslateText">
-                <keyboard-shortcut keymap="$default" first-keystroke="meta T"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="meta M"/>
             </action>
         </group>
     </actions>

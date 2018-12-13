@@ -13,39 +13,43 @@ import utils.TranslatorWrapper
 
 class MyAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent?) {
-
-
         if (TranslatorWrapper.filePath.isNullOrEmpty()) {
-
             val noti = NotificationGroup("Translator Plugin", NotificationDisplayType.BALLOON, true)
             noti.createNotification(
                 "Set Config Path",
                 "Set configuration json path in preferrence",
                 NotificationType.INFORMATION,
                 null
-            )
-                .notify(e?.project)
-
+            ).notify(e?.project)
         } else {
             val editor = e?.getRequiredData(CommonDataKeys.EDITOR)
             val caretModel = editor?.caretModel
             val selectedText = caretModel?.currentCaret?.selectedText
-
             val project = e?.project
             val document = editor?.document
             val selectionModel = editor?.selectionModel
-
             val start = selectionModel?.selectionStart
             val end = selectionModel?.selectionEnd
-
-            WriteCommandAction.runWriteCommandAction(
-                project
-            ) { document?.replaceString(start!!, end!!, TranslatorWrapper.translate(selectedText)) }
-
-            selectionModel?.removeSelection()
+            try {
+                val translatedText = TranslatorWrapper.translateString(selectedText)
+                WriteCommandAction.runWriteCommandAction(project) {
+                    document?.replaceString(
+                        start!!,
+                        end!!,
+                        translatedText
+                    )
+                }
+                selectionModel?.removeSelection()
+            } catch (ex: Exception) {
+                val noti = NotificationGroup("Translator Plugin", NotificationDisplayType.BALLOON, true)
+                noti.createNotification(
+                    "Error",
+                    ex.localizedMessage,
+                    NotificationType.INFORMATION,
+                    null
+                ).notify(e?.project)
+            }
         }
-
-
     }
 
     override fun update(e: AnActionEvent?) {
