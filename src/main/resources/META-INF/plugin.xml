@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.iambedant.commentTranslator</id>
     <name>Comment Translator</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="iambedant@gmail.com" url="https://iambedant.com">iamBedant</vendor>
 
     <description><![CDATA[
     Enter short description for your plugin here.<br>
@@ -37,7 +37,7 @@
                     class="action.MyAction"
                     text="_Translate"
                     description="TranslateText">
-                <keyboard-shortcut keymap="$default" first-keystroke="meta M"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta M"/>
             </action>
         </group>
     </actions>

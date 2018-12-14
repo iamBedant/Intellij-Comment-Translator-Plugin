@@ -6,6 +6,7 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.openapi.project.Project
 import com.intellij.util.xmlb.XmlSerializerUtil
+import utils.DEFAULT_LANGUAGE
 import utils.TranslatorWrapper
 import java.io.Serializable
 
@@ -19,7 +20,7 @@ class TranslatorComponents :
 
 
     var configJsonPath: String = ""
-    var preferedLanguage: String = "English -en"
+    var preferedLanguage: String = DEFAULT_LANGUAGE
 
     override fun getState(): TranslatorComponents? = this
 

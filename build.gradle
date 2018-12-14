@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.iambedant'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 intellij {
-    version '2018.2.5'
+    version '2018.1.6'
 }
 patchPluginXml {
     changeNotes """

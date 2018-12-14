@@ -11,19 +11,40 @@ object TranslatorWrapper {
 
     lateinit var filePath: String
     private lateinit var translate: Translate
-    var targetLanguage = "English -en"
+    var targetLanguage = DEFAULT_LANGUAGE
 
     fun getLanguageCode(language: String): String {
         return language.substringAfter("-")
     }
 
-    fun initializeTranslator(){
-        val credentials = GoogleCredentials.fromStream(FileInputStream(filePath))
-            .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"))
-
-        translate = TranslateOptions.newBuilder().setCredentials(credentials).build().service
-
+    fun initializeTranslator(notifyFunc: (String, String) -> Unit) {
+        try {
+            createTranslator()
+        } catch (e: Exception) {
+            notifyFunc.invoke(
+                NOTIFICATION_TITLE,
+                NOTIFICATION_MESSAGE
+            )
+        }
     }
+
+    // this is a translation text
+
+    private fun initializeTranslator() {
+        try {
+            createTranslator()
+        } catch (e: Exception) {
+
+        }
+    }
+
+
+    private fun createTranslator(){
+        val credentials = GoogleCredentials.fromStream(FileInputStream(filePath))
+            .createScoped(Lists.newArrayList(GOOGLE_CLOUD_URL))
+        translate = TranslateOptions.newBuilder().setCredentials(credentials).build().service
+    }
+
 
     /**
      * takes a string and return a translated string
@@ -31,7 +52,7 @@ object TranslatorWrapper {
      */
     fun translateString(selectedText: String?): String {
 
-        if(!TranslatorWrapper::translate.isInitialized){
+        if (!TranslatorWrapper::translate.isInitialized) {
             initializeTranslator()
         }
 
@@ -52,9 +73,9 @@ object TranslatorWrapper {
     /**
      * return a list of language supported by google translator
      */
-    fun getLanguageList(): List<Language>{
-        if(!TranslatorWrapper::translate.isInitialized){
-            initializeTranslator()
+    fun getLanguageList(notifyFunc: (String, String) -> Unit): List<Language> {
+        if (!TranslatorWrapper::translate.isInitialized) {
+            initializeTranslator(notifyFunc)
         }
         return translate.listSupportedLanguages()
     }
