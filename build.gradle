@@ -25,6 +25,13 @@ compileTestKotlin {
 }
 intellij {
     version '2018.1.6'
+    pluginName 'Comment Translator'
+    intellij.updateSinceUntilBuild false
+
+    publishPlugin {
+        username intellijPublishUsername
+        password intellijPublishPassword
+    }
 }
 patchPluginXml {
     changeNotes """
