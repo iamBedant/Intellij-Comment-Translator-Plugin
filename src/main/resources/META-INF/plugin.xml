@@ -4,9 +4,23 @@
     <vendor email="iambedant@gmail.com" url="https://iambedant.com">iamBedant</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+     <br>Plugin for translating comment</br>
+        <b><br>How to use</br></b>
+        <ul>
+ 	        <li>Follow bellow link to create Google Cloud Translation API and download a private key as JSON.</li><a href ="https://cloud.google.com/translate/docs/quickstart-client-libraries">Google cloud translate api docs.</a>
+            <li> Select the comment and hit Ctrl+Shift+M or go to Toolbar->Translator->Translate.
+        </ul>
+
+        <p><img src="https://plugins.jetbrains.com/files/11446/screenshot_18814.png" alt="demo" width="600" height="360"></p>
+        <p><img src="https://plugins.jetbrains.com/files/11446/screenshot_18815.png" alt="demo" width="600" height="360"></p>
+
+      <br></br>
+     <a href="https://github.com/iamBedant/Intellij-Comment-Translator-Plugin"> Full Usage Documentation</a></br>
     ]]></description>
+
+
+    <idea-version since-build="145.0"/>
+    <depends>com.intellij.modules.lang</depends>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
