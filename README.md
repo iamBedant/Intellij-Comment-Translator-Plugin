@@ -22,7 +22,7 @@
 ### Use 
  Select the comment and hit Ctrl+Shift+M or go to Toolbar->Translator->Translate.
  
- ![](https://plugins.jetbrains.com/files/11446/screenshot_18815.png)
+ ![](https://cdn-images-1.medium.com/max/1600/1*jDH2XJxB_ZVHCT06PHpviw.gif)
  
  
 ## License
