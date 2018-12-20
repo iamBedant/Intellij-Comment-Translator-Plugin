@@ -19,8 +19,9 @@
     ]]></description>
 
 
-    <idea-version since-build="145.0"/>
+    <idea-version since-build="172.0"/>
     <depends>com.intellij.modules.lang</depends>
+    <version>0.0.2</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
